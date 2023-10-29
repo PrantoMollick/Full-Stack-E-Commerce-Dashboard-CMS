@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
+import toast from "react-hot-toast";
+import { useParams, useRouter } from "next/navigation";
 import { Store } from "@prisma/client";
 import { Trash } from "lucide-react";
 import { z } from "zod";
@@ -19,6 +21,7 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import axios from "axios";
 
 interface SettingsFormProps {
   initialData: Store;
@@ -31,6 +34,8 @@ const formSchema = z.object({
 type SettingsFormValue = z.infer<typeof formSchema>;
 
 const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
+  const params = useParams();
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -40,7 +45,16 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
   });
 
   const onSubmit = async (data: SettingsFormValue) => {
-    console.log(data);
+    try {
+      setIsLoading(true);
+      await axios.patch(`/api/stores/${params.storeId}`, data);
+      router.refresh();
+      toast.success("Store updated");
+    } catch (error) {
+      toast.error("Something went wrong.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
