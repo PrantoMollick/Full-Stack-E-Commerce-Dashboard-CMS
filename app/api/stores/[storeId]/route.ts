@@ -5,5 +5,7 @@ export async function PATCH(
   { params }: { params: { storeId: string } }
 ) {
   try {
-  } catch (error) {}
+  } catch (error) {
+    console.log("[STORE_POST]", error);
+  }
 }
