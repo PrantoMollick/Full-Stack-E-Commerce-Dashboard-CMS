@@ -1,0 +1,32 @@
+"use client";
+
+import { Plus } from "lucide-react";
+import React from "react";
+
+import { Button } from "@/components/ui/button";
+import Heading from "@/components/ui/heading";
+import { Separator } from "@radix-ui/react-separator";
+import { useParams, useRouter } from "next/navigation";
+
+const BillboardClient = () => {
+  const router = useRouter();
+  const params = useParams();
+
+  return (
+    <>
+      <div className="flex items-center justify-between">
+        <Heading
+          title="Billboards (0)"
+          description="Manage Billboards for your store"
+        />
+        <Button>
+          <Plus className="mr-2 h-4 w-4" />
+        </Button>
+      </div>
+
+      <Separator />
+    </>
+  );
+};
+
+export default BillboardClient;
