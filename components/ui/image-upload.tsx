@@ -4,16 +4,17 @@ import { useEffect, useState } from "react";
 import { CldUploadWidget } from "next-cloudinary";
 import { Button } from "@/components/ui/button";
 import { ImagePlus, Trash } from "lucide-react";
+import Image from "next/image";
 
 interface ImageUploadProps {
-  disable?: boolean;
+  disabled?: boolean;
   onChange: (value: string) => void;
   onRemove: (value: string) => void;
   value: string[];
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({
-  disable,
+  disabled,
   onChange,
   onRemove,
   value
@@ -25,6 +26,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   }, []);
 
   const onUpload = (result: any) => {
+    console.log(result);
     onChange(result.info.secure_url);
   };
 
@@ -48,11 +50,12 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                 <Trash className="h-4 w-4" />
               </Button>
             </div>
+            <Image fill className="object-cover" alt="Image" src={url} />
           </div>
         ))}
       </div>
 
-      <CldUploadWidget uploadPreset="<Upload Preset>">
+      <CldUploadWidget onUpload={onUpload} uploadPreset="ejzjj5hs">
         {({ open }) => {
           function handleOnClick(e: React.MouseEvent<HTMLElement>) {
             e.preventDefault();
@@ -61,11 +64,12 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
           return (
             <Button
               type="button"
-              disabled={disable}
+              disabled={disabled}
               variant="secondary"
               onClick={handleOnClick}
             >
               <ImagePlus className="h-4 w-4 mr-2" />
+              Upload an image
             </Button>
           );
         }}
