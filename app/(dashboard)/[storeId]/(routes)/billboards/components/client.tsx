@@ -7,8 +7,14 @@ import { Button } from "@/components/ui/button";
 import Heading from "@/components/ui/heading";
 import { Separator } from "@radix-ui/react-separator";
 import { useParams, useRouter } from "next/navigation";
+import { BillboardColumn, columns } from "./columns";
+import { DataTable } from "@/components/ui/data-table";
 
-const BillboardClient = () => {
+interface BillboardClientProps {
+  data: BillboardColumn[];
+}
+
+const BillboardClient: React.FC<BillboardClientProps> = ({ data }) => {
   const router = useRouter();
   const params = useParams();
 
@@ -16,7 +22,7 @@ const BillboardClient = () => {
     <>
       <div className="flex items-center justify-between">
         <Heading
-          title="Billboards (0)"
+          title={`Billboards ${data.length}`}
           description="Manage Billboards for your store"
         />
         <Button
@@ -25,8 +31,8 @@ const BillboardClient = () => {
           <Plus className="mr-2 h-4 w-4" />
         </Button>
       </div>
-
       <Separator />
+      <DataTable columns={columns} data={data} />
     </>
   );
 };
