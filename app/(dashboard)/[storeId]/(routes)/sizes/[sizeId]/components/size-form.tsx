@@ -24,7 +24,6 @@ import { Input } from "@/components/ui/input";
 import axios from "axios";
 import AlertModal from "@/components/modals/alert-modal";
 import { useOrigin } from "@/hooks/use-origin";
-import ImageUpload from "@/components/ui/image-upload";
 
 const formSchema = z.object({
   name: z.string().min(1),
