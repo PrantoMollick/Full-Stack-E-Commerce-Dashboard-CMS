@@ -27,8 +27,9 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 ## Environment Variable
 
+[Clerk Authentication system integrate](https://clerk.com/docs/references/nextjs/)
+
 ```bash
-#[Clerk Authentication system integrate](https://clerk.com/docs/references/nextjs/).overview]
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=<key>
 CLERK_SECRET_KEY=<secret key>
 NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
@@ -37,14 +38,32 @@ NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
 NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
 ```
 
-## Prisma Setup with mysql
+[Cloudenery](https://cloudinary.com/documentation/react_image_and_video_upload)
+
+```bash
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=<namekey>
+```
+
+## [Prisma Setup with mysql](https://www.prisma.io/docs/concepts/database-connectors/mysql)
+
 ```bash
 npm install @prisma/client prisma
 # or
 yarn add @prisma/client prisma
 
+npx prisma init --datasource-provider mysql
+
+
+#Update your .env prisma generated mysql connection link then write your model into the schema.prisma file after that run this below cli command
 npx prisma generate
 # or
 yarn prisma generate
 
+npx prisma db push
+```
+
+## [Environment Variable for prisma mysql](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/connect-your-database-node-mysql)
+
+```bash
+DATABASE_URL="mysql://<user>:<password>@127.0.0.1:3306/<db_name>?KEY1=VALUE&KEY2=VALUE&KEY3=VALUE"
 ```
